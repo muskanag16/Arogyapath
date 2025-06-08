@@ -39,6 +39,7 @@ const AuthPage = () => {
     try {
       await firebase.SignInWithGoogle();
       alert("✅ Google sign-in successful!");
+      navigate("/");
     } catch (error) {
       alert("❌ " + error.message);
     }
