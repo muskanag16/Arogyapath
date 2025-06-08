@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import {useFirebase} from "../Context/firebase";
+import {useFirebase} from "../Context/Firebase";
 
 const NavbarWithSidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
