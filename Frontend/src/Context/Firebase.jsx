@@ -10,22 +10,22 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 import { useState,useEffect } from 'react';
-// const firebaseConfig = {
-//   apiKey: "AIzaSyB-b1Q1smNSqNN1MCZgQIUWIGuSbmWKbHk",
-//   authDomain: "arogyapath-b14d4.firebaseapp.com",
-//   projectId: "arogyapath-b14d4",
-//   storageBucket: "arogyapath-b14d4.firebasestorage.app",
-//   messagingSenderId: "1028878863676",
-//   appId: "1:1028878863676:web:7b929d8a446e0a47bb6239"
-// };
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyB-b1Q1smNSqNN1MCZgQIUWIGuSbmWKbHk",
+  authDomain: "arogyapath-b14d4.firebaseapp.com",
+  projectId: "arogyapath-b14d4",
+  storageBucket: "arogyapath-b14d4.firebasestorage.app",
+  messagingSenderId: "1028878863676",
+  appId: "1:1028878863676:web:7b929d8a446e0a47bb6239"
 };
+// const firebaseConfig = {
+//   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+//   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+//   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+//   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+//   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+//   appId: import.meta.env.VITE_FIREBASE_APP_ID,
+// };
 const FirebaseContext = createContext(null);
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
