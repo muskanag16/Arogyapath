@@ -1,7 +1,7 @@
 import React from 'react';
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
-import { useFirebase } from "../Context/firebase";
+import { useFirebase } from "../Context/Firebase";
 
 function AccountDetail() {
     const { user } = useFirebase();
