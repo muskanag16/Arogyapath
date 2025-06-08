@@ -18,6 +18,7 @@ const firebaseConfig = {
   messagingSenderId: "1028878863676",
   appId: "1:1028878863676:web:7b929d8a446e0a47bb6239"
 };
+
 // const firebaseConfig = {
 //   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
 //   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
