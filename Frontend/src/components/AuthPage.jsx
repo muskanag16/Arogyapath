@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
-import { useFirebase } from "../Context/firebase";
+import { useFirebase } from "../Context/Firebase";
 import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
