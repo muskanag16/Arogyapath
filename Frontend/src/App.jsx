@@ -7,6 +7,7 @@ import BhajansPage from './components/BhajansPage'
 import MantrasPage from './components/MantrasPage'
 import HealthTracker from './components/HealthTracker'
 import AuthPage from './components/AuthPage'
+import YogaPage from './components/YogaPage'
 function App() {
   
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/mantras" element={<MantrasPage />} />
         <Route path="/health-tracker" element={<HealthTracker />} />
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/yoga" element={<YogaPage/>}/>
         {/* other routes... */}
       </Routes>
      

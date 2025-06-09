@@ -215,9 +215,7 @@ const NavbarWithSidebar = () => {
             )}
           </div>
 
-          <a href="#" className="hover:text-blue-600">
-            Yoga
-          </a>
+                    <button onClick={() => navigate("/yoga")} className="hover:text-blue-600">Yoga</button>
           <a href="#" className="hover:text-blue-600">
             Find a Doctor
           </a>
