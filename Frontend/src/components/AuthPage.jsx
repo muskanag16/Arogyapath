@@ -1,25 +1,57 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
+import { useFirebase } from "../Context/Firebase";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
+  const navigate = useNavigate();
+
   const [isSignup, setIsSignup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
+  const firebase = useFirebase();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // console.log("hii",firebase);
+
   const togglePassword = () => setShowPassword(!showPassword);
 
-  const handleGoogleLogin = () => {
-    alert("🔗 Connect Google OAuth backend logic here");
-  };
-
-  const handleFacebookLogin = () => {
-    alert("🔗 Connect Facebook OAuth backend logic here");
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`${isSignup ? "Signing up" : "Logging in"}...`);
+    try {
+      if (isSignup) {
+        await firebase.SignupUserWithEmailandPassword(email, password);
+        alert("✅ Account created successfully!");
+      } else {
+        const response=await firebase.LoginUserWithEmailandPassword(email, password);
+        alert("✅ Logged in successfully!");
+        console.log(response.user.email);
+        navigate("/");
+      }
+    } catch (error) {
+      alert("❌ " + error.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await firebase.SignInWithGoogle();
+      alert("✅ Google sign-in successful!");
+      navigate("/");
+    } catch (error) {
+      alert("❌ " + error.message);
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    try {
+      await firebase.SignInWithFacebook();
+      alert("✅ Facebook sign-in successful!");
+    } catch (error) {
+      alert("❌ " + error.message);
+    }
   };
 
   return (
@@ -40,17 +72,23 @@ const AuthPage = () => {
                 required
               />
             )}
+
             <input
               type="email"
               placeholder="Email"
               className="w-full p-3 border border-gray-300 rounded"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
+
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className="w-full p-3 border border-gray-300 rounded pr-10"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               <span
