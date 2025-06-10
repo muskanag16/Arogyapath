@@ -1,10 +1,76 @@
 // AppointmentPage.jsx
 // AppointmentPage.jsx
 // AppointmentPage.jsx
-import React from "react";
+import React, { useState } from "react";
 import { CalendarCheck, UserCheck, Stethoscope, Send, MailCheck } from "lucide-react";
+import { useFirebase } from "../Context/Firebase";
 
 const AppointmentPage = () => {
+  const[formData,setformData]=useState({
+      name: "",
+      age: "",
+      gender: "",
+      phone: "",
+      email: "",
+      city: "",
+      date: "",
+      time: "",
+      selectdoctor: "",
+      specialization: "",
+
+  })
+  const handlechange=(e)=>{
+    const {name,value}=e.target;
+    setformData((prev)=>({
+      ...prev,
+      [name]:value
+    }))
+    console.log(name,value)
+  }
+  const {user,addAppointments}=useFirebase();
+  const submitform=async(e)=>{
+    e.preventDefault();
+     const {
+    name,
+    age,
+    gender,
+    phone,
+    email,
+    city,
+    date,
+    time,
+    selectdoctor,
+    specialization,
+  } = formData;
+    
+    if(!user){
+      alert("Please login first");
+    }
+   else  if (
+    !name || !age || !gender || !phone || !email ||
+    !city || !date || !time || !selectdoctor || !specialization
+  ) {
+    alert("Please fill in all the fields.");
+    return;
+  }
+    else {
+      await addAppointments(user.uid,formData);
+      alert("Appointment booked successfully!");
+      setformData({
+        name: "",
+        age: "",
+        gender: "",
+        phone: "",
+        email: "",
+        city: "",
+        date: "",
+        time: "",
+        selectdoctor: "",
+        specialization: "",
+      });
+    }
+
+  }
   return (
     <div>
       {/* Header Image with More Height */}
@@ -73,33 +139,34 @@ const AppointmentPage = () => {
 
   {/* Appointment Form */}
   <div className="bg-white p-6 rounded-lg shadow-md">
-    <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <form onSubmit={submitform} className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* Left Half of Form */}
       <div className="space-y-4">
-        <input type="text" placeholder="Full Name" className="w-full p-3 border rounded" />
-        <input type="number" placeholder="Age" className="w-full p-3 border rounded" />
-        <select className="w-full p-3 border rounded">
+        <input onChange={handlechange} type="text" placeholder="Full Name" name="name" value={formData.name} className="w-full p-3 border rounded" />
+        <input onChange={handlechange} type="number" placeholder="Age" name="age" value={formData.age} className="w-full p-3 border rounded" />
+        <select onChange={handlechange} name="gender" value={formData.gender} className="w-full p-3 border rounded">
           <option>Gender</option>
           <option>Male</option>
           <option>Female</option>
           <option>Other</option>
         </select>
-        <input type="tel" placeholder="Phone Number" className="w-full p-3 border rounded" />
+        <input onChange={handlechange} name="phone" value={formData.phone} type="tel" placeholder="Phone Number" className="w-full p-3 border rounded" />
       </div>
 
       {/* Right Half of Form */}
       <div className="space-y-4">
-        <input type="email" placeholder="Email" className="w-full p-3 border rounded" />
-        <input type="text" placeholder="City" className="w-full p-3 border rounded" />
-        <input type="date" className="w-full p-3 border rounded" />
-        <input type="time" className="w-full p-3 border rounded" />
-        <input type="text" placeholder="Select a Doctor" className="w-full p-3 border rounded" />
-        <input type="text" placeholder="Specialization" className="w-full p-3 border rounded" />
+        <input onChange={handlechange} name="email" value={formData.email} type="email" placeholder="Email" className="w-full p-3 border rounded" />
+        <input onChange={handlechange}  name="city" value={formData.city} type="text" placeholder="City" className="w-full p-3 border rounded" />
+        <input onChange={handlechange} name="date" value={formData.date} type="date" className="w-full p-3 border rounded" />
+        <input onChange={handlechange} name="time" value={formData.time} type="time"  className="w-full p-3 border rounded" />
+        <input onChange={handlechange} name="selectdoctor" value={formData.selectdoctor} type="text" placeholder="Select a Doctor" className="w-full p-3 border rounded" />
+        <input  onChange={handlechange} name="specialization" value={formData.specialization} type="text" placeholder="Specialization" className="w-full p-3 border rounded" />
       </div>
 
       {/* Submit Button */}
       <div className="md:col-span-2 mt-4">
         <button
+        
           type="submit"
           className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 text-lg"
         >

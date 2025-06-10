@@ -26,6 +26,7 @@ function App() {
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/yoga" element={<YogaPage/>}/>
         <Route path='/account-detail' element={<AccountDetail/>} />
+        
         {/* other routes... */}
       </Routes>
      
